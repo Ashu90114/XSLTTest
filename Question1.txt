@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:template match="/">
+<html> 
+ <head>
+   <style>
+      th{
+        background-color: #D6EFED;
+        text-align: center;
+      }
+      th , td{
+       border: 1px solid #D8D9DA;
+      }
+      body{
+        font-size: 12pt;
+      }
+   </style>
+ </head>
+<body>
+  <table>
+    <tr>
+      <th>Employee Name</th>
+      <th>Designation</th>
+      <th>Date of Joining</th>
+      <th>Address</th>
+      <th>Salary</th>
+    </tr>
+    
+     <xsl:apply-templates select="catalog/EmployeeDetails[Designation = 'Technical Writer']" />
+
+     <xsl:apply-templates select="catalog/EmployeeDetails[number(substring-before(salary, 'LPA'))>5 and number(substring-before(salary, 'LPA')) &lt; 7]" />
+    
+  </table>
+</body>
+</html>
+</xsl:template>
+
+<xsl:template match="catalog/EmployeeDetails">
+  <tr>
+     <td> <xsl:value-of select="EmployeeName" /> </td>
+     <td> <xsl:value-of select="Designation" /> </td>
+     <td> <xsl:value-of select="DateofJoining" /> </td>
+  </tr>
+</xsl:template>
+</xsl:stylesheet>
+
